@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "deploy:prod": "gh-pages -d dist -u \"github-actions-bot <support+actions@github.com>\"",
     "lint:fix": "prettier --write ./src"
   },
   "dependencies": {

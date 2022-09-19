@@ -52,10 +52,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build
+        run: pnpm build
 
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          pnpm gh-pages -d dist -u "github-actions-bot <support+actions@github.com>"
+          pnpm run deploy:prod
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
