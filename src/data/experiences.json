@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Deloitte Levvia",
+    "shortDescription": "Deloitte TTL's Very Small Auditing tool",
+    "description": "Levvia is Deloitte’s global VSA solution supporting The Deloitte Way to execute smaller, less complex, private audit engagements worldwide. Built collaboratively with VSA practitioners across Deloitte and available in the cloud, Levvia is designed specifically to support the needs of VSA practitioners and their engagements worldwide.",
+    "technologies": ["ReactJS", "dotnet core", "PostgreSQL", "Azure"],
+    "url": "https://cognia.deloitteresources.com/api/v1/content/links/10001/0901ff81823bee80",
+    "screenshots": [
+      {
+        "url": "/img/levvia-1.png",
+        "caption": "Levvia Working Papers"
+      }
+    ]
+  }
+]

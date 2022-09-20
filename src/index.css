@@ -21,7 +21,7 @@
     @apply before:h-4;
   }
   h2 {
-    @apply text-xl font-bold uppercase text-slate-500 tracking-tight;
+    @apply text-xl font-bold text-slate-400 tracking-tight lowercase;
   }
   h3 {
     @apply font-semibold;
@@ -36,3 +36,4 @@
     word-spacing: .5rem;
   }
 }
+
