@@ -4,14 +4,30 @@ import DarkmodeSwitch from './DarkmodeSwitch'
 import { definitions } from './types/supabase'
 import { useSupabase } from './services/useSupabase'
 
+type Attachment = definitions['Attachment']
 type Expertise = definitions['Expertise']
-type Experience = definitions['Experience']
-type Member = definitions['Member']
+type Experience = definitions['Experience'] & {
+  _experience?: {
+    Attachment: Attachment
+  }[]
+}
+
+type Member = definitions['Member'] & {
+  _member?: {
+    Attachment: Attachment
+  }[]
+}
 
 function App() {
   const { data: expertises } = useSupabase<Expertise>('Expertise')
-  const { data: experiences } = useSupabase<Experience>('Experience')
-  const { data: members } = useSupabase<Member>('Member', "urls ( label )")
+  const { data: experiences } = useSupabase<Experience>(
+    'Experience',
+    '*, _experience(Attachment(*))'
+  )
+  const { data: members } = useSupabase<Member>(
+    'Member',
+    '*, _member(Attachment(*))'
+  )
 
   return (
     <div className='p-8 md:p-16 lg:p-24 space-y-8 md:space-y-12 lg:space-y-16 max-w-3xl'>
@@ -50,11 +66,11 @@ function App() {
                 of experiences
               </div>
               <div className='space-x-4'>
-                {/* {member.urls.map((u) => (
-                  <a href={u.uri} key={u.name}>
-                    {u.name}
+                {member._member?.map(({ Attachment: attachment }) => (
+                  <a href={attachment.url} key={attachment.id}>
+                    {attachment.label}
                   </a>
-                ))} */}
+                ))}
               </div>
             </li>
           ))}
@@ -86,16 +102,21 @@ function App() {
                     }}>
                     <div className='space-y-8 pt-4 md:pt-8 prose overflow-auto'>
                       <h1>{exp.name}</h1>
-                      {/* {exp.screenshots.map((img) => {
+                      {exp._experience?.map(({ Attachment: screenshot }) => {
                         return (
-                          <figure key={img.url}>
-                            <img src={img.url} alt={img.caption || exp.name} />
-                            {img.caption && (
-                              <figcaption>{img.caption}</figcaption>
-                            )}
-                          </figure>
+                          screenshot.type === 'IMAGE' && (
+                            <figure key={screenshot.url}>
+                              <img
+                                src={screenshot.url}
+                                alt={screenshot.label || exp.name}
+                              />
+                              {screenshot.label && (
+                                <figcaption>{screenshot.label}</figcaption>
+                              )}
+                            </figure>
+                          )
                         )
-                      })} */}
+                      })}
                       <p>{exp.description}</p>
                       <div className='flex space-x-4'>
                         {/* {exp.technologies.map((tech) => (

@@ -4,8 +4,22 @@ const defaultDarkmode = window.matchMedia(
   '(prefers-color-scheme: dark)'
 ).matches
 
+if (!window.localStorage.getItem('color-scheme')) {
+  window.localStorage.setItem(
+    'color-scheme',
+    defaultDarkmode ? 'dark' : 'light'
+  )
+}
+
 export default function DarkmodeSwitch() {
-  const [darkmode, setDarkmode] = useState(defaultDarkmode)
+  const [darkmode, setDarkmode] = useState(
+    window.localStorage.getItem('color-scheme') === 'dark'
+  )
+
+  const setLocalDarkmode = (darkmode: boolean) => {
+    window.localStorage.setItem('color-scheme', darkmode ? 'dark' : 'light')
+    setDarkmode(darkmode)
+  }
 
   useEffect(() => {
     if (darkmode) {
@@ -34,7 +48,7 @@ export default function DarkmodeSwitch() {
           className='sr-only peer'
           onChange={(e) => {
             const { checked } = e.target
-            setDarkmode(checked)
+            setLocalDarkmode(checked)
           }}
         />
         <div className="w-9 h-5 bg-slate-400 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
