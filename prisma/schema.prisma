@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AttachmentType {
+  IMAGE
+  LINK
+  DOCUMENT
+}
+
+model Expertise {
+  id          String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid()
+  name        String @unique() @db.VarChar(100)
+  description String @db.Text()
+}
+
+model Attachment {
+  id         String         @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid()
+  label      String         @db.VarChar(255)
+  url        String         @db.VarChar(511)
+  type       AttachmentType
+  experience Experience[]   @relation(name: "experience")
+  member     Member[]       @relation(name: "member")
+}
+
+model Experience {
+  id               String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid()
+  name             String       @db.VarChar(100)
+  shortDescription String       @db.Text()
+  description      String       @db.Text()
+  technologies     String[]
+  url              String       @db.VarChar(511)
+  screenshots      Attachment[] @relation(name: "experience")
+}
+
+model Member {
+  id                String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid()
+  name              String       @db.VarChar(100)
+  position          String       @db.VarChar(255)
+  yearOfExperiences Int
+  urls               Attachment[] @relation(name: "member")
+}

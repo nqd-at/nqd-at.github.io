@@ -1,14 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 
-const tw = require('tailwindcss/defaultConfig')
+// const tw = require('tailwindcss/defaultConfig')
 
 module.exports = {
+  darkMode: "class",
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     fontFamily: {
       sans: [
-        'Inter var',
-        'Inter',
+        'Alliance1',
+        'Alliance1Fallback',
+        // 'Inter var',
+        // 'Inter',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
