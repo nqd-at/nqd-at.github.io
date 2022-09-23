@@ -3,6 +3,7 @@ import common from './data/common.json'
 import DarkmodeSwitch from './DarkmodeSwitch'
 import { definitions } from './types/supabase'
 import { useSupabase } from './services/useSupabase'
+import { useLayoutEffect } from 'react'
 
 type Attachment = definitions['Attachment']
 type Expertise = definitions['Expertise']
@@ -19,6 +20,9 @@ type Member = definitions['Member'] & {
 }
 
 function App() {
+  useLayoutEffect(() => {
+    window.document.title = "Welcome to 'nqdat' development team"
+  })
   const { data: expertises } = useSupabase<Expertise>('Expertise')
   const { data: experiences } = useSupabase<Experience>(
     'Experience',
