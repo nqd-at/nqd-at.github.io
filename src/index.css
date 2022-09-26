@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-300 dark:bg-slate-900 font-light text-slate-900 dark:text-slate-200;;
+    @apply bg-slate-300 dark:bg-slate-900 font-light text-slate-900 dark:text-slate-200 transition-colors;
   }
   a {
     @apply relative font-normal text-sm;
@@ -18,7 +18,7 @@
     @apply before:h-4;
   }
   h2 {
-    @apply text-xl font-bold text-slate-400 lowercase dark:text-slate-500;
+    @apply text-xl font-bold text-slate-400 lowercase dark:text-slate-500 transition-colors;
   }
   h3 {
     @apply font-semibold;

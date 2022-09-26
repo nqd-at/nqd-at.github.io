@@ -1,27 +1,39 @@
 import { useEffect, useState } from 'react'
-import { definitions } from '../types/supabase'
 import { supabase } from './supabase'
+import { Tables } from './types'
 
-export type TableName = keyof definitions
-
-export const useSupabase = <T>(tableName: TableName, select: string = '*') => {
+export const useSupabase = <T>(
+  tableName: keyof Tables,
+  select: string = '*'
+) => {
   const [data, setData] = useState<T[]>()
   const [error, setError] = useState<string>()
+  const [loading, setLoading] = useState<boolean>(true)
+
+  const fetcher = async () => {
+    supabase
+      .from<T>(tableName)
+      .select(select)
+      .then((response) => {
+        if (response.error) {
+          setError(response.error.message)
+        } else {
+          setData(response.data || undefined)
+        }
+      })
+  }
 
   useEffect(() => {
     if (!data && !error) {
-      supabase
-        .from<T>(tableName)
-        .select(select)
-        .then((response) => {
-          if (response.error) {
-            setError(response.error.message)
-          } else {
-            setData(response.data || undefined)
-          }
-        })
+      setTimeout(
+        () =>
+          fetcher().finally(() => {
+            setLoading(false)
+          }),
+        1000
+      )
     }
-  }, [data, error])
+  }, [data, error, loading])
 
-  return { data, error }
+  return { data, error, loading }
 }

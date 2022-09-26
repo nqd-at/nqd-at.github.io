@@ -12,8 +12,8 @@
     "deploy": "gh-pages -d dist",
     "deploy:prod": "gh-pages -d dist -u \"github-actions-bot <support+actions@github.com>\"",
     "lint:fix": "prettier --write ./src",
-    "update-types": "openapi-typescript \"${VITE_SUPABASE_URL}/rest/v1/?apikey=${VITE_SUPABASE_ANON_KEY}\" --version=2 --output src/types/supabase.ts",
-    "dotenv:update-types": "dotenv pnpm update-types"
+    "types": "supabase gen types typescript --db-url ${DATABASE_URL} > ./src/types/schema.ts",
+    "types:env": "dotenv pnpm types"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.7",
