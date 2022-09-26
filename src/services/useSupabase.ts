@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { supabase } from './supabase'
 import { Tables } from './types'
 
@@ -8,30 +8,26 @@ export const useSupabase = <T>(
 ) => {
   const [data, setData] = useState<T[]>()
   const [error, setError] = useState<string>()
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, startTransition] = useTransition()
 
   const fetcher = async () => {
     supabase
       .from<T>(tableName)
       .select(select)
       .then((response) => {
-        if (response.error) {
-          setError(response.error.message)
-        } else {
-          setData(response.data || undefined)
-        }
+        startTransition(() => {
+          if (response.error) {
+            setError(response.error.message)
+          } else {
+            setData(response.data || undefined)
+          }
+        })
       })
   }
 
   useEffect(() => {
     if (!data && !error) {
-      setTimeout(
-        () =>
-          fetcher().finally(() => {
-            setLoading(false)
-          }),
-        1000
-      )
+      setTimeout(() => fetcher(), 1000)
     }
   }, [data, error, loading])
 

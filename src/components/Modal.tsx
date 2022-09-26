@@ -1,4 +1,4 @@
-import React, {
+import {
   PropsWithChildren,
   ReactNode,
   RefObject,
@@ -7,6 +7,8 @@ import React, {
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
+import Button from './Button'
+import { BackIcon } from './icons/BackIcon'
 
 export type ModalProps = {
   defaultOpen?: boolean
@@ -25,12 +27,12 @@ export const ModalContent = ({
 }: PropsWithChildren<ModalContentProps>) => {
   return createPortal(
     <div
-      className='fixed inset-0 bg-slate-200 space-y-4 animate-fade-in'
+      className='fixed inset-0 bg-slate-300 dark:bg-slate-900 space-y-4 animate-fade-in'
       ref={modalRef}>
       <div className='px-8 md:px-16 lg:px-24 pt-8 md:pt-16 !pb-0'>
-        <button className='text-3xl' onClick={close}>
-          &larr;
-        </button>
+        <Button onClick={close}>
+          <BackIcon className='w-6 h-6' />
+        </Button>
       </div>
       <div className='p-8 md:p-16 lg:p-24 !pt-0 space-y-8 md:space-y-12 lg:space-y-16'>
         <div>{children}</div>

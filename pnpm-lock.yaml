@@ -30,12 +30,14 @@ specifiers:
   supabase: ^1.4.8
   tailwindcss: ^3.1.8
   typescript: '*'
+  use-suspender: ^1.1.0
   vite: ^3.1.0
 
 dependencies:
   '@supabase/supabase-js': 1.35.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  use-suspender: 1.1.0
 
 devDependencies:
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
@@ -1897,7 +1899,6 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
-    dev: true
 
   /fast-glob/3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
@@ -3323,6 +3324,12 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /use-suspender/1.1.0:
+    resolution: {integrity: sha512-e/7MBIaOVU18lj2gtw1amu3WI67bDdc1u4AGcLaVn/+KgC0aGvCYoWTneXuiGU8hE8iLzrUAdwIAcx19kLjL/w==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+    dev: false
 
   /utf-8-validate/5.0.9:
     resolution: {integrity: sha512-Yek7dAy0v3Kl0orwMlvi7TPtiCNrdfHNd7Gcc/pLq4BLXqfAmd0J7OWMizUQnTTJsyjKn02mU7anqwfmUP4J8Q==}
