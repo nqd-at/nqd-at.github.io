@@ -55,6 +55,10 @@ jobs:
       
       - name: Build
         run: pnpm build
+        env:
+          NODE_ENV: production
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Deploy with gh-pages
         run: |
