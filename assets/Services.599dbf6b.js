@@ -1,1 +1,0 @@
-import{c as s}from"./createSuspender.eeb0063c.js";import{j as e}from"./index.c10475d2.js";const t=s("Expertise");function n(){const a=t.read();return e("ul",{children:a.map(r=>e("li",{children:e("p",{children:r.name})},r.id))})}export{n as default};
