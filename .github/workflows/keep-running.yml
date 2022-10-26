@@ -5,6 +5,7 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
-    uses: jtalk/url-health-check-action@v2
-    with:
-      url: https://nqd-at.github.io/
+    steps:
+      - uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://nqd-at.github.io/
